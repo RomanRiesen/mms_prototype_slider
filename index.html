@@ -8,9 +8,15 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+
     function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
     }
+
+    function fit_input_size() {
+        $("#amount").css("width", $("#amount").val().length + "ch")
+    }
+
   $( function() {
     const [name, MINS, MAXS, unit_nameS] = window.location.search.substring(1).split("-");
     const MIN = parseInt(MINS)
@@ -19,7 +25,7 @@
     document.getElementById("range-label").innerHTML=name+":"
     document.getElementById("unit").innerHTML=unit_name
 
-    let displayRange = (a,b) => {if(a != b) return numberWithCommas(a) + " - " + numberWithCommas(b); else return numberWithCommas(a)}
+    let displayRange = (a,b) => {if(a != b) return numberWithCommas(a) + " - " + numberWithCommas(b); else return numberWithCommas(a) + " "}//+ " " is a hack
 
     $( "#slider-range" ).slider({
       range: true,
@@ -28,6 +34,7 @@
       values: [ MIN, MAX ],
       slide: function( event, ui ) {
         $( "#amount" ).val(displayRange(ui.values[0], ui.values[1]));
+        fit_input_size()
       }
     });
 
@@ -41,9 +48,10 @@
           console.log(min, max)
           $("#slider-range").slider("values", 0, min)
           $("#slider-range").slider("values", 1, max)
-          $("#amount").css("width", $("#amount").val().length + "ch")
+          fit_input_size()
       })
-    $("#amount").css("width", $("#amount").val().length + "ch")
+
+    fit_input_size()
 
     $(document.body).css("font-family", "Arial")
     $("#slider-range").css("max-width", "98%")
