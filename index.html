@@ -14,7 +14,7 @@
     }
 
     function fit_input_size() {
-        $("#amount").css("width", $("#amount").val().length-1 + "ch")
+        $("#amount").css("width", $("#amount").val().length + "ch")//Not very accurate, should render to hidden element with the same font (etc.) settings and set to that length.
     }
 
   $( function() {
@@ -46,7 +46,10 @@
           min = Math.min(...l)
           max = Math.max(...l)
           if(max > MAX) max = MAX;
+          if(min > MAX) min = MAX;
           if(min < MIN) min = MIN;
+          if(max < MIN) max = MIN;
+
           if(max == undefined){
             max = min
             $("#amount").val(min);
