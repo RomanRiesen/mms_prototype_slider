@@ -18,11 +18,12 @@
     }
 
   $( function() {
-    const [name, MINS, MAXS, step_sizeS, unit_nameS] = window.location.search.substring(1).split("-");
+    const [nameS, MINS, MAXS, step_sizeS, unit_nameS] = window.location.search.substring(1).split("-");
     const MIN = parseFloat(MINS)
     const MAX = parseFloat(MAXS)
     const step_size = parseFloat(step_sizeS)
     const unit_name = unit_nameS || ""
+    const name = nameS.replace("_", " ")
     document.getElementById("range-label").innerHTML=name+":"
     document.getElementById("unit").innerHTML=unit_name
 
@@ -44,7 +45,7 @@
       $("#amount").change(e => {
           console.log(e)
           let l = $("#amount").val().split("-")//FIXME no negative values possible
-          l = l.map(e => parseInt(e))
+          l = l.map(e => parseFloat(e))
           min = Math.min(...l)
           max = Math.max(...l)
           if(max > MAX) max = MAX;
