@@ -17,8 +17,9 @@
     const MAX = parseInt(MAXS)
     const unit_name = unit_nameS || ""
     document.getElementById("range-label").innerHTML=name+":"
+    document.getElementById("unit").innerHTML=unit_name
 
-    let displayRange = (a,b) => {return numberWithCommas(a) + " - " + numberWithCommas(b) + " " + unit_name}
+    let displayRange = (a,b) => {if(a != b) return numberWithCommas(a) + " - " + numberWithCommas(b); else return numberWithCommas(a)}
 
     $( "#slider-range" ).slider({
       range: true,
@@ -31,6 +32,18 @@
     });
 
     $("#amount").val(displayRange($( "#slider-range" ).slider( "values", 0 ), $( "#slider-range" ).slider( "values", 1 )))
+      $("#amount").change(e => {
+          console.log(e)
+          let [min, max] = $("#amount").val().split("-")//FIXME no negative values possible
+          if(max == undefined) max = min
+          if(max > MAX) max = MAX;
+          if(min < MIN) min = MIN;
+          console.log(min, max)
+          $("#slider-range").slider("values", 0, min)
+          $("#slider-range").slider("values", 1, max)
+          $("#amount").css("width", $("#amount").val().length + "ch")
+      })
+    $("#amount").css("width", $("#amount").val().length + "ch")
 
     $(document.body).css("font-family", "Arial")
     $("#slider-range").css("max-width", "98%")
@@ -49,8 +62,10 @@
 <body>
 
 <p>
+  <span>
   <label for="amount" id = "range-label"></label>
-  <input type="text" id="amount" readonly style="border:0; font-weight:bold;">
+  <input type="text" id="amount" style="border:0; font-weight:bold;"><span id="unit"></span>
+  </span>
 </p>
  
 <div id="slider-range"></div>
