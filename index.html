@@ -44,6 +44,8 @@
           let [min, max] = $("#amount").val().split("-")//FIXME no negative values possible
           min = parseInt(min)
           max = parseInt(max)
+          min = Math.min(min, max)
+          max = Math.max(min, max)
           if(max > MAX) max = MAX;
           if(min < MIN) min = MIN;
           if(max == undefined){
