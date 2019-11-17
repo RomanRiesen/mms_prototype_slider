@@ -18,7 +18,7 @@
     }
 
   $( function() {
-    const [nameS, MINS, MAXS, step_sizeS, unit_nameS] = window.location.search.substring(1).split("-");
+    const [nameS, MINS, MAXS, step_sizeS, unit_nameS] = unescape(window.location.search.substring(1)).split("-")
     const MIN = parseFloat(MINS)
     const MAX = parseFloat(MAXS)
     const step_size = parseFloat(step_sizeS) || 1
