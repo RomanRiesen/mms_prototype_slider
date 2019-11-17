@@ -42,7 +42,7 @@
       $("#amount").change(e => {
           console.log(e)
           let l = $("#amount").val().split("-")//FIXME no negative values possible
-          l = l.map(e => {return parseInt(e)})
+          l = l.map(e => parseInt(e))
           min = Math.min(...l)
           max = Math.max(...l)
           if(max > MAX) max = MAX;
