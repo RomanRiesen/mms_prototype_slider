@@ -1,0 +1,43 @@
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Slider - Range slider</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    const [name, MINS, MAXS] = window.location.search.substring(1).split("-");
+    const MIN = parseInt(MINS)
+    const MAX = parseInt(MAXS)
+    document.getElementById("range-label").innerHTML=name
+    $( "#slider-range" ).slider({
+      range: true,
+      min: MIN,
+      max: MAX,
+      values: [ MIN, MAX ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+
+    $(".ui-widget-header").css("background-color", "#2196F3");
+    $(".ui-corner-all").css("border-radius", "10px");
+  } );
+
+  </script>
+</head>
+<body>
+
+<p>
+  <label for="amount" id = "range-label"></label>
+  <input type="text" id="amount" readonly style="border:0; font-weight:bold;">
+</p>
+ 
+<div id="slider-range"></div>
+</body>
+</html>
