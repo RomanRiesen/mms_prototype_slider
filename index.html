@@ -8,6 +8,9 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    }
   $( function() {
     const [name, MINS, MAXS] = window.location.search.substring(1).split("-");
     const MIN = parseInt(MINS)
@@ -22,8 +25,8 @@
         $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
     });
-    $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+    $( "#amount" ).val( numberWithCommas($( "#slider-range" ).slider( "values", 0 )) +
+      " - " + numberWithCommas($( "#slider-range" ).slider( "values", 1 )) );
 
     $(".ui-widget-header").css("background-color", "#2196F3");
     $(".ui-corner-all").css("border-radius", "10px");
