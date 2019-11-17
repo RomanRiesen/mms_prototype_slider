@@ -16,7 +16,7 @@
     const MIN = parseInt(MINS)
     const MAX = parseInt(MAXS)
     const unit_name = unit_nameS || ""
-    document.getElementById("range-label").innerHTML=name
+    document.getElementById("range-label").innerHTML=name+":"
 
     let displayRange = (a,b) => {return numberWithCommas(a) + " - " + numberWithCommas(b) + " " + unit_name}
 
