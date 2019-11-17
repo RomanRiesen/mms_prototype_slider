@@ -41,11 +41,10 @@
     $("#amount").val(displayRange($( "#slider-range" ).slider( "values", 0 ), $( "#slider-range" ).slider( "values", 1 )))
       $("#amount").change(e => {
           console.log(e)
-          let [min, max] = $("#amount").val().split("-")//FIXME no negative values possible
-          min = parseInt(min)
-          max = parseInt(max)
-          min = Math.min(min, max)
-          max = Math.max(min, max)
+          let l = $("#amount").val().split("-")//FIXME no negative values possible
+          l = l.map(e => {return parseInt(e)})
+          min = Math.min(...l)
+          max = Math.max(...l)
           if(max > MAX) max = MAX;
           if(min < MIN) min = MIN;
           if(max == undefined){
@@ -54,7 +53,6 @@
           } else {
             $("#amount").val(min+" - "+max)
           }
-          console.log(min, max)
           $("#slider-range").slider("values", 0, min)
           $("#slider-range").slider("values", 1, max)
           fit_input_size()
