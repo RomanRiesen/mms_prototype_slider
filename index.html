@@ -21,7 +21,7 @@
     const [nameS, MINS, MAXS, step_sizeS, unit_nameS] = window.location.search.substring(1).split("-");
     const MIN = parseFloat(MINS)
     const MAX = parseFloat(MAXS)
-    const step_size = parseFloat(step_sizeS)
+    const step_size = parseFloat(step_sizeS) || 1
     const unit_name = unit_nameS || ""
     const name = nameS.replace("_", " ")
     document.getElementById("range-label").innerHTML=name+":"
