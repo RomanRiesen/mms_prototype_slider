@@ -33,7 +33,8 @@
     $("#amount").val(displayRange($( "#slider-range" ).slider( "values", 0 ), $( "#slider-range" ).slider( "values", 1 )))
 
     $(document.body).css("font-family", "Arial")
-    $(document.body).css("max-width", "90vw")
+    $("#slider-range").css("max-width", "98%")
+    $("#slider-range").css("left","1%")
     $(".ui-widget-header").css("background-color", "#2196F3");
     $(".ui-slider-handle").css("background-color", "#2196F3");
     $(".ui-corner-all").css("border-radius", "10px");
